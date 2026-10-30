@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Bakery - Giỏ hàng</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container nav">
+            <a href="index.html" class="logo"><img src="images/logo-bakery.jpg" alt="Sweet Bakery"> Sweet Bakery</a>
+            <nav>
+                <a href="index.html">Trang chủ</a>
+                <a href="products.html">Sản phẩm</a>
+                <a href="cart.html">Giỏ hàng 🛒</a>
+                <a href="admin.html">Quản lý</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="section">
+        <div class="container">
+            <h1>🛒 Giỏ hàng</h1>
+            <div id="cart-list"></div>
+            <div class="cart-total">
+                <h2>Tổng tiền: <span id="total">0đ</span></h2>
+                <button class="btn" onclick="checkout()">Đặt hàng</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Sweet Bakery</p>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>
