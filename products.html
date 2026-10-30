@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Bakery - Sản phẩm</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container nav">
+            <a href="index.html" class="logo"><img src="images/logo-bakery.jpg" alt="Sweet Bakery"> Sweet Bakery</a>
+            <nav>
+                <a href="index.html">Trang chủ</a>
+                <a href="products.html">Sản phẩm</a>
+                <a href="cart.html">Giỏ hàng 🛒</a>
+                <a href="admin.html">Quản lý</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="section">
+        <div class="container">
+            <h1>Tất cả sản phẩm</h1>
+
+            <div class="tools">
+                <input type="text" id="search" placeholder="Tìm tên bánh..." oninput="searchProduct()">
+
+                <select id="category" onchange="filterCategory()">
+                    <option value="all">Tất cả danh mục</option>
+                    <option value="Bánh kem">Bánh kem</option>
+                    <option value="Bánh ngọt">Bánh ngọt</option>
+                    <option value="Bánh mì">Bánh mì</option>
+                </select>
+
+                <select id="sort" onchange="sortProduct()">
+                    <option value="default">Sắp xếp</option>
+                    <option value="low">Giá thấp → cao</option>
+                    <option value="high">Giá cao → thấp</option>
+                </select>
+            </div>
+
+            <div id="product-list" class="product-grid"></div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Sweet Bakery</p>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/products.js"></script>
+</body>
+</html>
