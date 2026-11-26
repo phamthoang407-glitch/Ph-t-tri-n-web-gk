@@ -1,0 +1,32 @@
+/* Bơ Vàng V3: thiết kế editorial mới, tách biệt khỏi giao diện V2 */
+:root{--v3-plum:#392634;--v3-purple:#54374b;--v3-pink:#f3b9bd;--v3-sun:#ffc96e;--v3-paper:#fffbf6}
+body{background:var(--v3-paper);color:#332a30}
+.site-header{background:#fffaf5!important;border-bottom:1px solid #ece4df!important;box-shadow:none!important}
+.site-header .brand strong{color:#422d39}.desktop-nav a.active:after{background:#9c4b64!important}
+.btn--primary{background:#582d45!important;border-color:#582d45!important}
+/* The new hero uses different markup rather than recoloring the old hero. */
+.editorial-hero{width:min(1470px,calc(100% - 60px));min-height:650px;margin:27px auto 0;display:grid;grid-template-columns:1.02fr 0.98fr;background:var(--v3-plum);overflow:hidden;border-radius:7px 7px 80px 7px;isolation:isolate}
+.editorial-hero__copy{padding:48px clamp(32px,5vw,88px) 24px;display:flex;flex-direction:column;position:relative;color:#fff9f4;min-width:0}
+.editorial-hero__topline{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.22em;font-weight:700;color:#f5d6c8;white-space:nowrap}
+.editorial-hero__spark{font-size:23px;color:var(--v3-sun)}.editorial-hero__line{height:1px;width:35px;background:#a88b9c;flex:none}
+.editorial-hero__intro{font-size:15px;letter-spacing:.025em;color:#e7c6d3;margin:61px 0 15px}
+.editorial-hero h1{color:#fff9f5;font-size:clamp(60px,6.1vw,105px);font-weight:800;letter-spacing:-.085em;line-height:.99;margin:0;max-width:720px}
+.editorial-hero h1 em{font-family:Georgia,serif;font-weight:400;color:var(--v3-pink);letter-spacing:-.075em}
+.editorial-hero__period{color:var(--v3-sun)}
+.editorial-hero__description{font-size:14px;line-height:1.95;color:#e4d5de;max-width:430px;margin:27px 0 24px}
+.editorial-hero__actions{display:flex;align-items:center;gap:28px;flex-wrap:wrap;margin-bottom:35px}
+.editorial-hero__cta{background:var(--v3-sun);color:#352435;display:inline-flex;align-items:center;justify-content:space-between;gap:36px;padding:17px 23px;border-radius:8px;font-size:13px;font-weight:800;text-decoration:none;transition:transform .2s}
+.editorial-hero__cta:hover{transform:translateY(-3px);color:#352435;background:#ffda99}
+.editorial-hero__cta span{font-size:20px}.editorial-hero__secondary{color:#fbe4e8;text-decoration:none;font-size:12px;font-weight:700;border-bottom:1px solid #ba9faa;padding-bottom:6px}.editorial-hero__secondary:hover{color:#fff}
+.editorial-hero__foot{display:flex;gap:12px;justify-content:space-between;margin-top:auto;padding-top:20px;border-top:1px solid #735768;color:#bd9eae;font-size:9px;letter-spacing:.14em}
+.editorial-hero__art{position:relative;min-height:650px;background:#e3a28c;overflow:hidden}.editorial-hero__photo{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;filter:saturate(.92)}
+.editorial-hero__photo-shade{position:absolute;inset:0;background:linear-gradient(0deg,rgba(40,22,35,.57),transparent 38%)}
+.editorial-hero__sticker{position:absolute;right:8%;top:10%;width:130px;height:130px;background:#ffc96e;transform:rotate(12deg);border-radius:50%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;text-align:center;color:#543044;box-shadow:0 14px 30px #4a24343a}
+.editorial-hero__sticker span{font-size:23px}.editorial-hero__sticker strong{font-size:13px;line-height:1.05;letter-spacing:.11em}
+.editorial-hero__image-caption{position:absolute;bottom:30px;right:33px;color:white;font-size:10px;font-weight:700;letter-spacing:.18em}
+.editorial-ticker{width:min(1470px,calc(100% - 60px));margin:0 auto;background:var(--v3-pink);min-height:70px;display:flex;align-items:center;justify-content:space-around;gap:20px;padding:16px 20px;flex-wrap:wrap}
+.editorial-ticker div{color:#4b2a40;font-size:11px;font-weight:800;letter-spacing:.075em;white-space:nowrap}.editorial-ticker span{font-size:19px;vertical-align:middle;margin-right:11px}
+.categories,.products-section{max-width:1200px;margin-inline:auto}.section-heading h2{color:#463243}.eyebrow{color:#98516b!important}.category-card{background:#fff;border-color:#f2dee4!important}.category-card:hover{border-color:#b86d88!important}.category-card__icon{background:#fce9ec!important}.text-link{color:#94516a!important;border-bottom-color:#c391a5}
+.story-banner{background:#f8e8e9!important}.story-banner__content h2{color:#4d3045!important}
+@media(max-width:980px){.editorial-hero{grid-template-columns:1fr 1fr;min-height:560px}.editorial-hero__copy{padding:34px}.editorial-hero h1{font-size:clamp(49px,6.5vw,72px)}.editorial-hero__intro{margin-top:40px}.editorial-hero__art{min-height:560px}.editorial-ticker div{font-size:10px}}
+@media(max-width:700px){.editorial-hero{width:calc(100% - 24px);margin-top:12px;grid-template-columns:1fr;border-radius:8px 8px 45px 8px}.editorial-hero__copy{padding:28px 25px 25px}.editorial-hero__topline{font-size:9px}.editorial-hero__intro{margin:33px 0 14px}.editorial-hero h1{font-size:clamp(55px,13vw,80px)}.editorial-hero__description{font-size:13px}.editorial-hero__foot{font-size:8px}.editorial-hero__art{min-height:350px}.editorial-hero__sticker{width:95px;height:95px;right:7%;top:8%}.editorial-hero__sticker strong{font-size:10px}.editorial-ticker{width:calc(100% - 24px);gap:7px;padding:14px 8px}.editorial-ticker div{font-size:9px;letter-spacing:0}.editorial-ticker span{margin-right:4px;font-size:13px}}

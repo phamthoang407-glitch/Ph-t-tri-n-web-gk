@@ -1,0 +1,63 @@
+@using Microsoft.AspNetCore.Antiforgery
+@using Microsoft.AspNetCore.Identity
+@using Web_barkery1.Models
+@inject IAntiforgery Csrf
+@inject UserManager<ApplicationUser> Users
+@{
+    Layout = null;
+    var account = await Users.GetUserAsync(User);
+    var current = account == null ? null : new { id=account.Id, full_name=account.FullName, email=account.Email, role="ADMIN" };
+}
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="csrf-token" content="@Csrf.GetAndStoreTokens(Context).RequestToken">
+  <title>Quản trị | Bơ Vàng Bakery Mini</title>
+  <link rel="stylesheet" href="/css/mini-admin.css?v=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/css/mini-admin-modern.css?v=2">
+  <script>window.BAKERY_USER = @Json.Serialize(current);</script>
+</head>
+<body>
+<div class="mini-shell">
+  <aside class="mini-side">
+    <a class="mini-brand" href="/">🍰 Bơ Vàng <small>Bakery Mini</small></a>
+    <p class="mini-side-caption">QUẢN TRỊ CỬA HÀNG</p>
+    <nav class="mini-nav" aria-label="Chức năng quản trị">
+      <button type="button" class="selected" data-view="overview">▦ Tổng quan</button>
+      <button type="button" data-view="products">▣ Sản phẩm</button>
+      <button type="button" data-view="categories">▤ Danh mục</button>
+      <button type="button" data-view="orders">▥ Đơn hàng</button>
+    </nav>
+    <div class="mini-side-foot"><a href="/">← Xem cửa hàng</a><button type="button" id="mini-logout">Đăng xuất</button></div>
+  </aside>
+  <main class="mini-main">
+    <header class="mini-top"><div><p class="mini-kicker">BƠ VÀNG BAKERY</p><h1 id="mini-page-title">Tổng quan cửa hàng</h1><p class="mini-muted">Quản lý sản phẩm và đơn hàng trên cùng một hệ thống.</p></div><span class="mini-user">@(account?.FullName ?? "Quản trị viên")</span></header>
+    <div id="mini-message" role="status" aria-live="polite" class="mini-message" hidden></div>
+    <section data-panel="overview" class="mini-panel">
+      <div class="mini-metrics">
+        <article class="mini-metric"><small>Đơn hàng hôm nay</small><strong id="metric-orders">—</strong></article>
+        <article class="mini-metric"><small>Đơn hoàn thành hôm nay</small><strong id="metric-completed">—</strong></article>
+        <article class="mini-metric"><small>Doanh thu hôm nay</small><strong id="metric-revenue">—</strong></article>
+        <article class="mini-metric"><small>Tổng sản phẩm</small><strong id="metric-products">—</strong></article>
+      </div>
+      <div class="mini-card"><div class="mini-heading"><h2>Đơn gần đây</h2><button type="button" class="mini-link" data-go="orders">Xem tất cả →</button></div><div id="mini-recent-orders" class="mini-table-wrap">Đang tải...</div></div>
+    </section>
+    <section data-panel="products" class="mini-panel" hidden>
+      <div class="mini-card"><div class="mini-heading"><div><h2>Danh sách bánh</h2><p class="mini-muted">Thêm, sửa, xóa sản phẩm chưa bán hoặc đặt tồn kho bằng 0 để ngừng bán.</p></div><button type="button" class="mini-btn" id="mini-new-product">+ Thêm bánh</button></div>
+      <div class="mini-filters"><input id="mini-product-search" type="search" placeholder="Tìm tên bánh..."><select id="mini-product-category"><option value="">Tất cả danh mục</option></select></div>
+      <div id="mini-products-table" class="mini-table-wrap">Đang tải...</div><div id="mini-product-pages" class="mini-pages"></div>
+      </div>
+    </section>
+    <section data-panel="categories" class="mini-panel" hidden>
+      <div class="mini-card"><div class="mini-heading"><div><h2>Danh mục</h2><p class="mini-muted">Quản lý nhóm bánh đang kinh doanh.</p></div><button type="button" class="mini-btn" id="mini-new-category">+ Thêm danh mục</button></div><div id="mini-categories-table" class="mini-table-wrap">Đang tải...</div></div>
+    </section>
+    <section data-panel="orders" class="mini-panel" hidden>
+      <div class="mini-card"><div class="mini-heading"><div><h2>Đơn hàng</h2><p class="mini-muted">Chờ xác nhận → Đang xử lý → Hoàn thành; có thể hủy trước khi hoàn thành.</p></div><select id="mini-order-filter"><option value="">Tất cả trạng thái</option><option value="PENDING">Chờ xác nhận</option><option value="PROCESSING">Đang xử lý</option><option value="COMPLETED">Hoàn thành</option><option value="CANCELLED">Đã hủy</option></select></div><div id="mini-orders-table" class="mini-table-wrap">Đang tải...</div></div>
+    </section>
+  </main>
+</div>
+<dialog id="mini-editor" class="mini-dialog"><form id="mini-editor-form"><div class="mini-heading"><h2 id="mini-dialog-title">Chỉnh sửa</h2><button type="button" id="mini-close" class="mini-icon-btn" aria-label="Đóng">×</button></div><div id="mini-editor-fields"></div><div class="mini-dialog-actions"><button type="button" id="mini-cancel" class="mini-btn secondary">Hủy</button><button type="submit" class="mini-btn" id="mini-save">Lưu thay đổi</button></div></form></dialog>
+<script src="/js/api.js"></script><script src="/js/mini-admin.js?v=1"></script>
+</body></html>

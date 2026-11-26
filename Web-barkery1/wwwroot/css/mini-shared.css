@@ -1,0 +1,30 @@
+/* BƠ VÀNG BAKERY – CSS dùng chung (bản dễ học) */
+:root { --mini-ink:#362a33; --mini-plum:#56344b; --mini-rose:#a6607b; --mini-background:#fffaf7; }
+html { scroll-behavior:smooth; }
+body { background:var(--mini-background); }
+button, a, input, select, textarea { font:inherit; }
+button, .btn, a { -webkit-tap-highlight-color:transparent; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline:3px solid #e9a64e; outline-offset:3px;
+}
+img { max-width:100%; }
+.product-card { overflow:hidden; border-radius:16px; box-shadow:0 8px 28px rgba(61,39,52,.07); transition:transform .2s ease,box-shadow .2s ease; }
+.product-card:hover { transform:translateY(-3px); box-shadow:0 14px 34px rgba(61,39,52,.14); }
+.product-card__image { display:block; overflow:hidden; background:#f8eeeb; }
+.product-card__image img { width:100%; object-fit:cover; }
+.btn--primary { color:#fff !important; border-radius:10px; }
+.btn--primary:disabled, button:disabled { opacity:.52; cursor:not-allowed; }
+.empty-state { padding:25px; border:1px dashed #e3cdd6; border-radius:12px; text-align:center; color:#6e5867; }
+.mini-pagination { display:flex; align-items:center; justify-content:center; gap:12px; margin:28px 0; }
+.mini-pagination button { background:#fff; border:1px solid #dcc8d3; border-radius:9px; padding:10px 17px; color:#56344b; cursor:pointer; }
+.mini-pagination button:hover:not(:disabled) { background:#f6eaf0; }
+.mini-pagination button:disabled { opacity:.4; cursor:not-allowed; }
+@media(max-width:700px){
+  .product-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .catalog-layout { display:block; }
+  .product-card__body { padding:13px; }
+  .product-card__body h3 { font-size:14px; }
+  .card-actions { flex-wrap:wrap; }
+}
+@media(max-width:410px){.product-grid { grid-template-columns:1fr; }}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.product-card{transition:none}}
