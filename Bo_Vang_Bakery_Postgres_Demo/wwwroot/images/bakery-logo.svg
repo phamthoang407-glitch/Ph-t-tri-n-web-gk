@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Biểu tượng tiệm bánh Bakery">
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#b67547"/><stop offset="1" stop-color="#704126"/></linearGradient></defs>
+  <rect x="3" y="3" width="122" height="122" rx="34" fill="url(#bg)"/>
+  <rect x="10" y="10" width="108" height="108" rx="27" fill="none" stroke="#f4d7a9" opacity=".65" stroke-width="2"/>
+  <path d="M36 75c-10-10-2-29 14-29 5-19 32-18 38 0 20 0 22 25 8 33" fill="#fff2dc" stroke="#fff2dc" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M39 75h52l-6 24H45z" fill="#efd09a"/>
+  <path d="M55 53c-6-8-5-16 1-23m16 23c-2-8 0-15 7-21" fill="none" stroke="#b67547" stroke-width="5" stroke-linecap="round"/>
+  <path d="M38 77h53" stroke="#d2a665" stroke-width="3" stroke-linecap="round"/>
+  <path d="M28 26l7-8 6 8-7 8zm66 9 5-9 6 8-6 9z" fill="#f2ca8d" opacity=".9"/>
+</svg>

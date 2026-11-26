@@ -1,0 +1,36 @@
+@using Microsoft.AspNetCore.Antiforgery
+@using Microsoft.AspNetCore.Identity
+@using Web_barkery1.Models
+@inject IAntiforgery Csrf
+@inject UserManager<ApplicationUser> Users
+@{
+ Layout = null;
+ var account = await Users.GetUserAsync(User);
+ var role = User.IsInRole("ADMIN") ? "ADMIN" : "CUSTOMER";
+ var current = account == null ? null : new { id=account.Id, full_name=account.FullName, email=account.Email, role=role };
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giỏ hàng | Bơ Vàng Bakery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/cart.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+<meta name="csrf-token" content="@Csrf.GetAndStoreTokens(Context).RequestToken" />
+<script>window.BAKERY_USER = @Json.Serialize(current);</script>
+<link rel="stylesheet" href="/css/bovang-modern.css?v=2">
+<link rel="stylesheet" href="/css/mini-shared.css?v=1">
+</head>
+<body data-page="cart">
+<div id="header"></div>
+
+<section class="page-hero"><div class="container"><span class="eyebrow">YOUR BAG</span><h1>Giỏ hàng</h1><p>Kiểm tra sản phẩm, số lượng và tổng tiền trước khi thanh toán.</p></div></section>
+<main class="container cart-layout"><section class="panel cart-list" id="cart-list"></section>
+<aside class="panel summary"><h3>Tóm tắt đơn hàng</h3><div class="summary-row"><span>Tạm tính</span><strong id="subtotal">0đ</strong></div><div class="summary-row"><span>Phí giao hàng</span><span>Miễn phí</span></div><div class="summary-row summary-total"><span>Tổng cộng</span><strong id="total">0đ</strong></div><button class="btn btn--primary" onclick="goCheckout()">Thanh toán →</button></aside></main>
+<div id="footer"></div><div id="toast" class="toast"></div><nav id="mobile-nav"></nav>
+<script src="../js/api.js"></script><script src="../js/data.js"></script><script src="../js/main.js?v=4"></script>
+  <script src="../js/cart.js?v=4"></script><script src="../js/checkout.js"></script>
+</body></html>

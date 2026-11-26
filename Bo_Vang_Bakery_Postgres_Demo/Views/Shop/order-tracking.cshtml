@@ -1,0 +1,37 @@
+@using Microsoft.AspNetCore.Antiforgery
+@using Microsoft.AspNetCore.Identity
+@using Web_barkery1.Models
+@inject IAntiforgery Csrf
+@inject UserManager<ApplicationUser> Users
+@{
+ Layout = null;
+ var account = await Users.GetUserAsync(User);
+ var role = User.IsInRole("ADMIN") ? "ADMIN" : "CUSTOMER";
+ var current = account == null ? null : new { id=account.Id, full_name=account.FullName, email=account.Email, role=role };
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Theo dõi đơn hàng | Bơ Vàng Bakery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/tracking.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+<meta name="csrf-token" content="@Csrf.GetAndStoreTokens(Context).RequestToken" />
+<script>window.BAKERY_USER = @Json.Serialize(current);</script>
+<link rel="stylesheet" href="/css/bovang-modern.css?v=2">
+<link rel="stylesheet" href="/css/mini-shared.css?v=1">
+</head>
+<body data-page="tracking">
+<div id="header"></div>
+
+<section class="page-hero"><div class="container"><span class="eyebrow">MY ORDER</span><h1>Theo dõi đơn hàng</h1><p>Xem tiến trình giao chiếc bánh của bạn theo thời gian thực.</p></div></section>
+<main class="container tracking-wrap"><div class="tracking-head"><div><h2>Đơn hàng <span id="order-code">BK-2026-1024</span></h2><span class="status status--ship">Đang giao</span></div><strong id="order-total">870.000đ</strong></div>
+<section class="panel tracking-card"><div class="timeline"><div class="timeline-step done"><div class="timeline-dot">✓</div><span>Đã đặt hàng</span><small>09:15 • 15/10</small></div><div class="timeline-step done"><div class="timeline-dot">✓</div><span>Đang chuẩn bị</span><small>10:05 • 15/10</small></div><div class="timeline-step current"><div class="timeline-dot">●</div><span>Đang giao</span><small>14:20 • 15/10</small></div><div class="timeline-step"><div class="timeline-dot">4</div><span>Đã giao</span><small>Dự kiến hôm nay</small></div></div>
+<div class="order-info"><div><h3 style="font-size:14px;margin-bottom:10px">Sản phẩm trong đơn</h3><table class="order-table"><thead><tr><th>Sản phẩm</th><th>SL</th><th>Giá</th></tr></thead><tbody><tr><td>Bánh kem dâu tây</td><td>1</td><td>450.000đ</td></tr><tr><td>Bánh socola hạnh nhân</td><td>1</td><td>320.000đ</td></tr><tr><td>Phí giao hàng</td><td>—</td><td>Miễn phí</td></tr></tbody></table></div><div class="delivery-box"><strong>Địa chỉ giao hàng</strong>Nguyễn Thị Hoa<br>125 Nguyễn Huệ, Quận 1<br>TP. Hồ Chí Minh<br><br><strong>Người giao hàng</strong>Anh Minh • 0908 888 888</div></div></section></main>
+<div id="footer"></div><div id="toast" class="toast"></div><nav id="mobile-nav"></nav>
+<script src="../js/api.js"></script><script src="../js/data.js"></script><script src="../js/main.js?v=4"></script>
+  <script src="../js/orders.js"></script>
+</body></html>

@@ -1,0 +1,50 @@
+@using Microsoft.AspNetCore.Antiforgery
+@using Microsoft.AspNetCore.Identity
+@using Web_barkery1.Models
+@inject IAntiforgery Csrf
+@inject UserManager<ApplicationUser> Users
+@{
+ Layout = null;
+ var account = await Users.GetUserAsync(User);
+ var role = User.IsInRole("ADMIN") ? "ADMIN" : "CUSTOMER";
+ var current = account == null ? null : new { id=account.Id, full_name=account.FullName, email=account.Email, role=role };
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Danh mục bánh kem, bánh ngọt, bánh mì | Bơ Vàng Bakery</title>
+<meta name="description" content="Khám phá bánh kem, bánh ngọt và bánh mì tại Bơ Vàng Bakery. Xem giá, lựa chọn sản phẩm và đặt bánh dễ dàng.">
+<link rel="canonical" href="@(ViewData["CanonicalUrl"] ?? $"{Context.Request.Scheme}://{Context.Request.Host}/san-pham")">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/products.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+<meta name="csrf-token" content="@Csrf.GetAndStoreTokens(Context).RequestToken" />
+<script>window.BAKERY_USER = @Json.Serialize(current);</script>
+<link rel="stylesheet" href="/css/bovang-modern.css?v=2">
+<link rel="stylesheet" href="/css/mini-shared.css?v=1">
+</head>
+<body data-page="products">
+<div id="header"></div>
+
+<section class="page-hero"><div class="container"><span class="eyebrow">MENU BAKERY</span><h1>Danh mục bánh</h1><p>Chọn món bánh yêu thích từ những sản phẩm được làm mới mỗi ngày.</p></div></section>
+<main class="container catalog-layout">
+  <aside class="sidebar">
+    <div class="filter-group" id="category-filter"><h4>DANH MỤC</h4>
+      <a class="filter-link active" href="/san-pham">Tất cả sản phẩm</a>
+      <a class="filter-link" href="/san-pham?category=Gateaux%20kem%20tươi">Gateaux kem tươi</a>
+      <a class="filter-link" href="/san-pham?category=Bánh%20ngọt">Bánh ngọt</a>
+      <a class="filter-link" href="/san-pham?category=Bánh%20mì">Bánh mì</a>
+      <a class="filter-link" href="/san-pham?category=Bánh%20sinh%20nhật">Bánh sinh nhật</a>
+    </div>
+    <div class="filter-group"><h4>GIÁ</h4><a href="?price=low" class="filter-link">Dưới 100.000đ</a><a href="?price=mid" class="filter-link">100.000đ - 300.000đ</a><a href="?price=high" class="filter-link">Trên 300.000đ</a></div>
+  </aside>
+  <section><div class="catalog-top"><div><h2>Sản phẩm</h2><small id="catalog-count" style="color:var(--muted)">0 sản phẩm</small></div><div class="catalog-tools"><select id="sort-products" class="select"><option value="">Sắp xếp</option><option value="price-low">Giá thấp → cao</option><option value="price-high">Giá cao → thấp</option></select></div></div>
+  <div id="catalog-products" class="product-grid"></div><nav id="catalog-pagination" class="mini-pagination" aria-label="Phân trang sản phẩm"></nav></section>
+</main>
+<div id="footer"></div><div id="toast" class="toast"></div><nav id="mobile-nav"></nav>
+<script src="../js/api.js"></script><script src="../js/data.js"></script><script src="../js/main.js?v=4"></script>
+  <script src="../js/products.js?v=4"></script>
+</body></html>

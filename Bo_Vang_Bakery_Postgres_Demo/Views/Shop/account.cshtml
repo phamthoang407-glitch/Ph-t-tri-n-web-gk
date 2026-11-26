@@ -1,0 +1,36 @@
+@using Microsoft.AspNetCore.Antiforgery
+@using Microsoft.AspNetCore.Identity
+@using Web_barkery1.Models
+@inject IAntiforgery Csrf
+@inject UserManager<ApplicationUser> Users
+@{
+ Layout = null;
+ var account = await Users.GetUserAsync(User);
+ var role = User.IsInRole("ADMIN") ? "ADMIN" : "CUSTOMER";
+ var current = account == null ? null : new { id=account.Id, full_name=account.FullName, email=account.Email, role=role };
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tài khoản | Bơ Vàng Bakery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/account.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+<meta name="csrf-token" content="@Csrf.GetAndStoreTokens(Context).RequestToken" />
+<script>window.BAKERY_USER = @Json.Serialize(current);</script>
+<link rel="stylesheet" href="/css/bovang-modern.css?v=2">
+<link rel="stylesheet" href="/css/mini-shared.css?v=1">
+</head>
+<body data-page="account">
+<div id="header"></div>
+
+<section class="page-hero"><div class="container"><span class="eyebrow">MY ACCOUNT</span><h1>Tài khoản của tôi</h1><p>Quản lý thông tin cá nhân, đơn hàng và địa chỉ giao hàng.</p></div></section>
+<main class="container account-layout"><aside class="panel account-menu"><a class="active" href="#">Thông tin cá nhân</a><a href="order-tracking.html">Đơn hàng của tôi</a><a href="login.html" style="color:var(--red)">Đăng xuất</a></aside>
+<section class="panel account-content"><div class="profile-head"><div class="avatar" id="account-avatar"></div><div><h2></h2><p></p></div></div><div class="account-section"><h3>Thông tin cá nhân</h3><div class="form-grid"><div class="field"><label>HỌ VÀ TÊN</label><input autocomplete="name"></div><div class="field"><label>SỐ ĐIỆN THOẠI</label><input autocomplete="tel"></div><div class="field"><label>EMAIL</label><input autocomplete="email" readonly></div><div class="field"><label>ĐỊA CHỈ</label><input autocomplete="street-address"></div></div><button type="button" class="btn btn--primary" id="save-profile">Lưu thông tin</button></div></section></main>
+<div id="footer"></div><div id="toast" class="toast"></div><nav id="mobile-nav"></nav>
+<script src="../js/api.js"></script><script src="../js/data.js"></script><script src="../js/main.js?v=4"></script><script src="../js/account.js"></script>
+
+</body></html>

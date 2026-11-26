@@ -1,0 +1,7 @@
+.catalog-layout{display:grid;grid-template-columns:230px 1fr;gap:34px;padding:45px 0 75px}.sidebar{align-self:start;position:sticky;top:100px}.filter-group{padding:20px 0;border-bottom:1px solid var(--line)}.filter-group:first-child{padding-top:0}.filter-group h4{font-size:12px;margin-bottom:12px}.filter-link{display:block;color:var(--muted);font-size:12px;padding:7px 0;cursor:pointer}.filter-link.active,.filter-link:hover{color:var(--brown);font-weight:700}.catalog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.catalog-top h2{font-size:24px}.catalog-tools{display:flex;gap:8px}.select{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 12px;font-size:12px}.mobile-filter{display:none}
+
+/* Phân trang phiên bản Mini */
+.mini-pagination{display:flex;justify-content:center;align-items:center;gap:14px;margin:28px 0;flex-wrap:wrap}
+.mini-pagination button{border:1px solid #dbc7b0;background:#fffaf4;color:#5f3f2b;border-radius:10px;padding:10px 17px;cursor:pointer;font:inherit}
+.mini-pagination button:hover:not(:disabled){background:#f5e9da}
+.mini-pagination button:disabled{opacity:.4;cursor:not-allowed}
